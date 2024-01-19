@@ -28,3 +28,6 @@ const scroll = () => {
 
 window.addEventListener("scroll", scroll)
 
+setTimeout (function (){
+    openModal()
+}, 10000)
