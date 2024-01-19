@@ -80,3 +80,4 @@ resetBtn.onclick = () => {
     count = 0
     seconds.innerText = count;
 }
+

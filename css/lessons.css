@@ -45,6 +45,7 @@
     flex-direction: column;
     justify-content: center;
     height: 170px;
+    display: none;
 }
 
 .tab_content_block p {
@@ -169,4 +170,31 @@
 
 hr {
     width: 100%;
+}
+
+.wrapper {
+    width: 100%;
+    padding: 20px;
+    background-color: silver;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+.button {
+    width: 150px;
+    height: 60px;
+    background-color: yellow;
+    cursor: pointer;
+}
+.body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+.red {
+    background-color: red;
 }
