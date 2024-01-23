@@ -40,3 +40,68 @@ const showSlides = () => {
 }
 
 setInterval(showSlides, 3000)
+
+// 22.01.2024
+
+const somInput = document.querySelector('#som')
+const usdInput = document.querySelector('#usd')
+const eurInput = document.querySelector('#eur')
+
+// somInput.addEventListener('input', () => {
+//     const request = new XMLHttpRequest()
+//     request.open('GET', '../converter.json')
+//     request.setRequestHeader('Content-type', 'application/json')
+//     request.send()
+//
+//     request.addEventListener('load', () => {
+//         const data = JSON.parse(request.response)
+//         usdInput.value = (somInput.value / data.usd).toFixed(2)
+//     })
+//
+// })
+// usdInput.addEventListener('input', () => {
+//     const request = new XMLHttpRequest()
+//     request.open('GET', '../converter.json')
+//     request.setRequestHeader('Content-type', 'application/json')
+//     request.send()
+//
+//     request.addEventListener('load', () => {
+//         const data = JSON.parse(request.response)
+//         somInput.value = (usdInput.value * data.usd).toFixed(2)
+//     })
+//
+// })
+
+const converter = (element, targetElement, targetElement2,  currentValue) => {
+    element.oninput = () => {
+        const request = new XMLHttpRequest()
+        request.open('GET', '../converter.json')
+        request.setRequestHeader('Content-type', 'application/json')
+        request.send()
+
+        request.onload = () => {
+            const data = JSON.parse(request.response)
+            switch (currentValue) {
+                case 'som':
+                    targetElement.value = (element.value * data.som.usd).toFixed(2)
+                    targetElement2.value = (element.value * data.som.eur).toFixed(2)
+                    break
+                case 'usd':
+                    targetElement.value = (element.value * data.usd.som).toFixed(2)
+                    targetElement2.value = (element.value * data.usd.eur).toFixed(2)
+                    break
+                case 'eur':
+                    targetElement.value = (element.value * data.usd).toFixed(2)
+                    targetElement2.value = (element.value * data.som).toFixed(2)
+                    break
+                default:
+                    break
+            }
+            element.value === '' && (targetElement.value = targetElement2.value = "")  //исправление бага
+        }
+    }
+}
+
+converter(somInput, usdInput, eurInput, 'som')
+converter(usdInput, somInput, eurInput, 'usd')
+converter(eurInput, somInput, usdInput, 'eur')
